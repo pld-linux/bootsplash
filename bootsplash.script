@@ -67,7 +67,7 @@ cat /proc/splash | grep -q silent && _silent="yes"
 [ "$_shutdown" == "yes" ] && num=$(( $kscripts + 2 ))
 
 if [ -f "/etc/bootsplash/themes/$THEME/config/bootsplash-`/bin/fbresolution`.cfg" ]; then
-  . /etc/bootsplash/themes/$THEME/config/bootsplash-`/bin/fbresolution`.cfg
+  . /etc/bootsplash/themes/$THEME/config/bootsplash-`/bin/fbresolution`.cfg 2> /dev/null
 fi
   
 # Print text string. (Booting/Shutting down the system. Press
