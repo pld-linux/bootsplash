@@ -84,7 +84,6 @@ esac
 shift
 
 # We end up in bootanim start 
-set -x
 while getopts mr:d: name "$@"; do
 	# echo "loop: $*"
         case "$name" in
