@@ -6,7 +6,7 @@ Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.0.7
-Release:	0.6
+Release:	0.7
 Epoch:		0
 License:	GPL v2
 Group:		Applications/System
@@ -15,6 +15,7 @@ Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name
 Source1:	%{name}.script
 Source2:	%{name}-bootanim.script
 Source3:	%{name}.sysconfig
+Source4:	%{name}.init
 Patch0:		%{name}-freetype-includes.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
@@ -50,6 +51,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},/etc/{bootsplash/theme
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
 install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/bootanim
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/bootsplash
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/rc.d/init.d/bootsplash
 install Scripts/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Utilities/splash $RPM_BUILD_ROOT%{_bindir}/splash.bin
 install Utilities/{fbmngplay,fbresolution,fbtruetype} $RPM_BUILD_ROOT%{_bindir}
@@ -63,6 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc {Documentation,Utilities}/README.*
 %attr(755,root,root) %{_bindir}/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/bootsplash
+%attr(754,root,root) /etc/rc.d/init.d/bootsplash
 %{_datadir}/%{name}
 %dir /etc/bootsplash
 %dir /etc/bootsplash/themes
