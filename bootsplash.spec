@@ -1,4 +1,7 @@
-
+#
+# TODO:
+# - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
+#
 Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
