@@ -26,7 +26,7 @@ case "$1" in
 		
 		for console in $BOOT_SPLASH_CONSOLES; do
 		    msg_starting "bootsplash terminal $console"	
-		    daemon /bin/splash.bin -s -u $console "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
+		    daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
 		done
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/bootsplash
