@@ -94,7 +94,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/bootsplash/themes/darkblue/animations
 /etc/bootsplash/themes/darkblue/animations/*
 %dir /etc/bootsplash/themes/darkblue/config
-%config(noreplace) %verify(not md5 size mtime)/etc/bootsplash/themes/darkblue/config/*
+/etc/bootsplash/themes/darkblue/config/*
 %dir /etc/bootsplash/themes/darkblue/images
 /etc/bootsplash/themes/darkblue/images/*
 %endif
