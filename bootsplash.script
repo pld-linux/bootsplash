@@ -1,0 +1,85 @@
+#!/bin/bash
+#
+# splash.sh - This shell script triggers bootsplash actions during
+# system boot/shutdown. It can be run by the init scripts repeatedly
+# specifying the currently executed system script.
+# 
+# This script is used to play animations/sounds/show text/move the
+# progress bar, etc.
+# 
+# We call this function from /etc/rc.status:rc_splash() 
+#
+# This program is free software; you may redistribute it under 
+# the terms of the GNU General Public License. This program has 
+# absolutely no warranty.
+#
+# written 2002-2003 Stefan Reinauer, <stepan@suse.de>
+#
+# this script expects the following environment variables for an operable
+# progress bar:
+#
+#  sscripts = number of start scripts to be executed for runlevel change
+#  kscripts = number of stop scripts to be executed for runlevel change
+#  progress = number of currently executed start/stop script
+#  RUNLEVEL = runlevel to be reached.
+#
+# To play animations, it's advised that you have an animations.cfg in your
+# theme's config directory specifying the initscript name for an event and
+# the command to be executed:
+#
+#   fsck start:bootanim start bounce.mng
+#   master:bootanim stop
+#
+# See http://www.bootsplash.org/ for more information.
+#
+# Modified for PLD (arekm@pld-linux.org)
+
+[ -f /etc/sysconfig/system ] && . /etc/sysconfig/system
+
+_procsplash=$(cat /proc/splash 2> /dev/null)
+
+# assertions
+[ -e /proc/splash ] || exit 0
+[ -z "$progress" -a -z "$num" ] && exit 0
+[ -z "$(echo $_procsplash | grep on)" ] && exit 0
+
+# We chose verbose in grub
+cat /proc/cmdline | grep -v -q "splash=silent" && exit 0 
+
+if [ "$previous" == "3" -o "$previous" == "5" ] ; then
+  if [ "$runlevel"  = "3" -o "$runlevel" == "5" ] ; then
+    exit 0
+  fi
+fi
+
+# acquire data
+# 
+num=$(( $sscripts + 2 ))
+_shutdown="no"
+_silent="no"
+cat /proc/splash | grep -q silent && _silent="yes"
+[ "$runlevel" == "6" -o "$runlevel" == "0" ] && _shutdown="yes"
+[ "$_shutdown" == "yes" ] && num=$(( $kscripts + 2 ))
+
+# Print text string. (Booting/Shutting down the system. Press
+# F2 for verbose mode)
+#
+
+if [ "$progress" == 1 -o "$1" == "splash start" ]; then
+  [ "$_shutdown" == "yes" ] && ( echo "silent" > /proc/splash ; chvt 1)
+  _boot="Booting"
+  [ "$_shutdown" == "yes" ] && _boot="Shutting down"
+
+  if [ "$text_x" != "" -a "$text_y" != "" \
+       -a "$text_color" != "" -a "$text_size" != "" -a "$_silent" == "yes" ]; 
+  then
+    fbtruetype -x $text_x -y $text_y -t $text_color -s $text_size \
+  			"$_boot the system... Press F2 for verbose mode"
+  fi
+fi
+
+# Now paint the progressbar. This is done via the proc 
+# interface of the bootsplash.
+
+echo "show $(( 65534 * ( $progress + 1 ) / $num ))" > /proc/splash
+
