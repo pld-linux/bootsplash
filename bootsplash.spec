@@ -1,13 +1,10 @@
-Summary:	Bootsplash
-Summary(pl):	Bootsplash
+Summary:	Bootsplash - graphical boot process for Linux
 Name:		bootsplash
 Version:	3.0.7
 Release:	0.1
 Epoch:		0
 License:	GPL v2
-Group:		-
-######		Unknown group!
-Vendor:		-
+Group:		Applications/System
 Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	d7c7cdab692fb2edc5cf5ebb554f20a1
 URL:		http://www.bootsplash.org
@@ -20,15 +17,13 @@ When you have a kernel with bootsplash capability you can use the
 bootsplash and control it's behaviour with a set of userspace
 utilities.
 
-%description -l pl
-- -
-
 %prep
 %setup -q
 
 %build
 cd Utilities
-%{__make}
+%{__make} \
+	CC="%{__cc}"
 cd ..
 
 %install
