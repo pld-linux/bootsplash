@@ -12,6 +12,7 @@ Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name
 # Source0-md5:	d7c7cdab692fb2edc5cf5ebb554f20a1
 URL:		http://www.bootsplash.org
 BuildRequires:	freetype-devel	>= 2
+BuildRequires:	libmng-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
