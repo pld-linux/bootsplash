@@ -6,7 +6,7 @@ Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.0.7
-Release:	0.5
+Release:	0.6
 Epoch:		0
 License:	GPL v2
 Group:		Applications/System
