@@ -15,7 +15,7 @@ Source1:	%{name}.script
 Source2:	%{name}-bootanim.script
 Source3:	%{name}.sysconfig
 Source4:	%{name}-theme-darkblue-1.2.tar.gz
-# Source3-md5:	a5b64219f284ff772a4f3ebcd4f2bc34
+# Source4-md5:	a5b64219f284ff772a4f3ebcd4f2bc34
 Patch0:		%{name}-freetype-includes.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
