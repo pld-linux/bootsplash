@@ -1,4 +1,5 @@
 Summary:	Bootsplash - graphical boot process for Linux
+Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.0.7
 Release:	0.1
@@ -8,51 +9,47 @@ Group:		Applications/System
 Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	d7c7cdab692fb2edc5cf5ebb554f20a1
 Source1:	%{name}.script
-URL:		http://www.bootsplash.org
-BuildRequires:	freetype-devel	>= 2
+Patch0:		%{name}-freetype-includes.patch
+URL:		http://www.bootsplash.org/
+BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 When you have a kernel with bootsplash capability you can use the
-bootsplash and control it's behaviour with a set of userspace
+bootsplash and control it's behaviour with this set of userspace
 utilities.
+
+%description -l pl
+Maj±c j±dro z opcj± bootsplash mo¿na uzyskaæ graficzny ekran podczas
+startu systemu i sterowaæ jego zachowaniem przy u¿yciu tego zbioru
+narzêdzi przestrzeni u¿ytkownika.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-cd Utilities
-%{__make} \
-	CC="%{__cc}"
-cd ..
+%{__make} -C Utilities \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} -Wall -I/usr/include/freetype2 -DDEFAULT_FONTNAME=\\\"%{_datadir}/%{name}/luxisri.ttf\\\"" \
+	STRIP=true
 
 %install
 rm -rf $RPM_BUILD_ROOT
-# create directories if necessary
-install -d $RPM_BUILD_ROOT%{_docdir}/%{name}
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
-install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
-install Documentation/* $RPM_BUILD_ROOT%{_docdir}/%{name}
 install Scripts/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Utilities/splash $RPM_BUILD_ROOT%{_bindir}/splash.bin
 install Utilities/{fbmngplay,fbresolution,fbtruetype} $RPM_BUILD_ROOT%{_bindir}
 install Utilities/*.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
-install Utilities/README.* $RPM_BUILD_ROOT%{_docdir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc Documentation/README.{bootsplash,kernel,config,themes}
-%doc Utilities/README.{fbmngplay,fbtruetype}
+%doc {Documentation,Utilities}/README.*
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
-
-#%files subpackage
-#%defattr(644,root,root,755)
-#%doc extras/*.gz
-#%{_datadir}/%{name}-ext
