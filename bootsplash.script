@@ -34,7 +34,7 @@
 #
 # Modified for PLD (arekm@pld-linux.org)
 
-[ -f /etc/sysconfig/system ] && . /etc/sysconfig/system
+[ -f /etc/sysconfig/bootsplash ] && . /etc/sysconfig/bootsplash
 
 _procsplash=$(cat /proc/splash 2> /dev/null)
 
@@ -76,14 +76,13 @@ fi
 
 if [ "$progress" == 1 -o "$1" == "splash start" ]; then
   [ "$_shutdown" == "yes" ] && ( echo "silent" > /proc/splash ; chvt 1)
-  _boot="Booting"
-  [ "$_shutdown" == "yes" ] && _boot="Shutting down"
+  _boot=$BOOT_TXT
+  [ "$_shutdown" == "yes" ] && _boot=$SHUTDOWN_TXT
 
   if [ "$text_x" != "" -a "$text_y" != "" \
        -a "$text_color" != "" -a "$text_size" != "" -a "$_silent" == "yes" ]; 
   then
-    fbtruetype -x $text_x -y $text_y -t $text_color -s $text_size \
-  			"$_boot the system... Press F2 for verbose mode"
+    fbtruetype -x $text_x -y $text_y -t $text_color -s $text_size "$_boot"
   fi
 fi
 

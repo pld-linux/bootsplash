@@ -1,0 +1,18 @@
+# $Id$
+
+# boot splash enabled?
+#SPLASH=yes
+BOOT_SPLASH=yes
+
+# bootsplash theme... You have to have installed one
+#THEME=darkblue
+THEME=darkblue
+
+# Text to show when booting...
+#BOOT_TXT="Booting the system... press F2 for verbose mode"
+BOOT_TXT="Booting the system... press F2 for verbose mode"
+
+# Text to show when shutting down...
+#SHUTDOWN_TXT="Shutting down the system... press F2 for verbose mode"
+SHUTDOWN_TXT="Shutting down the system... press F2 for verbose mode"
+
