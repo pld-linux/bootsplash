@@ -5,15 +5,16 @@ Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.0.7
-Release:	0.4
+Release:	0.5
 Epoch:		0
 License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	d7c7cdab692fb2edc5cf5ebb554f20a1
 Source1:	%{name}.script
-Source2:	%{name}.sysconfig
-Source3:	%{name}-theme-darkblue-1.2.tar.gz
+Source2:	%{name}-bootanim.script
+Source3:	%{name}.sysconfig
+Source4:	%{name}-theme-darkblue-1.2.tar.gz
 # Source3-md5:	a5b64219f284ff772a4f3ebcd4f2bc34
 Patch0:		%{name}-freetype-includes.patch
 URL:		http://www.bootsplash.org/
@@ -49,7 +50,7 @@ Motyw darkblue do bootsplash.
 %endif
 
 %prep
-%setup -q %{?with_themes:-a3}
+%setup -q %{?with_themes:-a4}
 %patch0 -p1
 
 %build
@@ -63,7 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},/etc/{bootsplash/themes,sysconfig}}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/bootsplash
+install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/bootanim
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/bootsplash
 install Scripts/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Utilities/splash $RPM_BUILD_ROOT%{_bindir}/splash.bin
 install Utilities/{fbmngplay,fbresolution,fbtruetype} $RPM_BUILD_ROOT%{_bindir}
