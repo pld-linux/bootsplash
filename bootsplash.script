@@ -38,6 +38,11 @@
 
 _procsplash=$(cat /proc/splash 2> /dev/null)
 
+if [ -f /etc/bootsplash/themes/$THEME/config/animations.cfg ]; then
+      COMMAND="$(cat /etc/bootsplash/themes/$THEME/config/animations.cfg | grep "^$1"| cut -f2 -d\:)"
+      eval $COMMAND
+fi
+    
 # assertions
 [ -e /proc/splash ] || exit 0
 [ -z "$progress" -a -z "$num" ] && exit 0
@@ -61,6 +66,10 @@ cat /proc/splash | grep -q silent && _silent="yes"
 [ "$runlevel" == "6" -o "$runlevel" == "0" ] && _shutdown="yes"
 [ "$_shutdown" == "yes" ] && num=$(( $kscripts + 2 ))
 
+if [ -f "/etc/bootsplash/themes/$THEME/config/bootsplash-`/bin/fbresolution`.cfg" ]; then
+  . /etc/bootsplash/themes/$THEME/config/bootsplash-`/bin/fbresolution`.cfg
+fi
+  
 # Print text string. (Booting/Shutting down the system. Press
 # F2 for verbose mode)
 #
