@@ -41,7 +41,7 @@ if [ "$UID" -ne "0" ]; then
 fi
 
 THEME="No theme selected"
-test -f /etc/sysconfig/bootsplash && . /etc/sysconfig/bootsplash
+[ -f /etc/sysconfig/bootsplash ] && . /etc/sysconfig/bootsplash
 
 if [ ! -d /etc/bootsplash/themes/$THEME ]
 then
@@ -61,17 +61,17 @@ start)
 	;;
 stop)
 	# echo "$0 stop"
-	killall -q -2 fbmngplay
+	/bin/killall -q -2 fbmngplay
 	exit 0
 	;;
 kill)
 	# echo "$0 kill"
-	killall -q fbmngplay
+	/bin/killall -q fbmngplay
 	exit 0
 	;;
 next) 
 	# echo "$0 next"
-	killall -q -USR1 fbmngplay
+	/bin/killall -q -USR1 fbmngplay
 	exit 0
 	;;
 *)
@@ -84,35 +84,30 @@ esac
 shift
 
 # We end up in bootanim start 
-
-TEMP=`getopt -o mr:d:  -- "$@"`
-eval set -- "$TEMP"
-
-while true ; do
+set -x
+while getopts mr:d: name "$@"; do
 	# echo "loop: $*"
-        case "$1" in
-        -d) # directory
+        case "$name" in
+        d) # directory
 		shift
-		if [ ! -d "$1" ]; then
+		if [ ! -d "$OPTARG" ]; then
 			echo "Not a valid directory."
 			exit 1
 		fi
-		DIRECTORY=$1
+		DIRECTORY=$OPTARG
 		shift
 		;;
-	-r) # resolution 
+	r) # resolution 
 		shift
-		MODE=$1;
+		MODE=$OPTARG;
 		shift
 		;;
-	-m) # multiple files
+	m) # multiple files
 		shift
 		OPTIONS="$OPTIONS -s"
 		;;
-	--) # end
-		shift
-		break;;
 	*) # Weird
+		shift
 		echo "Internal Error."
 		exit 1
 		;;
