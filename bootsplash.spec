@@ -7,6 +7,7 @@ License:	GPL v2
 Group:		Applications/System
 Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	d7c7cdab692fb2edc5cf5ebb554f20a1
+Source1:	%{name}.script
 URL:		http://www.bootsplash.org
 BuildRequires:	freetype-devel	>= 2
 BuildRequires:	libmng-devel
@@ -33,9 +34,11 @@ install -d $RPM_BUILD_ROOT%{_docdir}/%{name}
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 install -d $RPM_BUILD_ROOT%{_bindir}
 
+install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
 install Documentation/* $RPM_BUILD_ROOT%{_docdir}/%{name}
 install Scripts/* $RPM_BUILD_ROOT%{_datadir}/%{name}
-install Utilities/{fbmngplay,fbresolution,fbtruetype,splash} $RPM_BUILD_ROOT%{_bindir}
+install Utilities/splash $RPM_BUILD_ROOT%{_bindir}/splash.bin
+install Utilities/{fbmngplay,fbresolution,fbtruetype} $RPM_BUILD_ROOT%{_bindir}
 install Utilities/*.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Utilities/README.* $RPM_BUILD_ROOT%{_docdir}/%{name}
 
