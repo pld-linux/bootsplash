@@ -1,8 +1,15 @@
 # $Id$
 
+# REMEMBER: changing BOOT_SPLASH, BOOT_SPLASH_RESOLUTIONS, THEME should be
+#           followed by mkinitrd
+
 # boot splash enabled?
 #SPLASH=yes
 BOOT_SPLASH=yes
+
+# desired resolutions (each one increases size of initrd)
+#BOOT_SPLASH_RESOLUTIONS="1024x768 800x600"
+BOOT_SPLASH_RESOLUTIONS=
 
 # bootsplash theme... You have to have installed one
 #THEME=darkblue
