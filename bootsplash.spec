@@ -2,7 +2,7 @@ Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.0.7
-Release:	0.1
+Release:	0.2
 Epoch:		0
 License:	GPL v2
 Group:		Applications/System
@@ -39,7 +39,7 @@ narzêdzi przestrzeni u¿ytkownika.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name}}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
+install %{SOURCE1} $RPM_BUILD_ROOT/bin/splash
 install Scripts/* $RPM_BUILD_ROOT%{_datadir}/%{name}
 install Utilities/splash $RPM_BUILD_ROOT%{_bindir}/splash.bin
 install Utilities/{fbmngplay,fbresolution,fbtruetype} $RPM_BUILD_ROOT%{_bindir}
@@ -51,5 +51,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc {Documentation,Utilities}/README.*
+%attr(755,root,root) /bin/*
 %attr(755,root,root) %{_bindir}/*
 %{_datadir}/%{name}
