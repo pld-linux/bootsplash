@@ -1,10 +1,10 @@
 # $Id$
 
 # REMEMBER: changing BOOT_SPLASH, BOOT_SPLASH_RESOLUTIONS, THEME should be
-#           followed by mkinitrd
+#           followed by geninitrd
 
 # boot splash enabled?
-#SPLASH=yes
+#BOOT_SPLASH=yes
 BOOT_SPLASH=yes
 
 # desired resolutions (each one increases size of initrd)
