@@ -64,3 +64,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/bootsplash
 %{_datadir}/%{name}
+%dir /etc/bootsplash
+%dir /etc/bootsplash/themes
