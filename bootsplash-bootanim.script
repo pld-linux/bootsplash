@@ -135,7 +135,7 @@ fi
 # echo "Pos:  $ax,$ay"
 # echo "options: $OPTIONS"
 
-CMDLINE="fbmngplay -x $ax -y $ay $OPTIONS"
+CMDLINE="/bin/fbmngplay -x $ax -y $ay $OPTIONS"
 for i in $*; do
     CMDLINE="$CMDLINE $DIRECTORY/$i"
 done
