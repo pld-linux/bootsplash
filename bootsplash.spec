@@ -7,10 +7,9 @@ Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.1
 Release:	1
-Epoch:		0
 License:	GPL v2
 Group:		Applications/System
-Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://www.bootsplash.de/files/splashutils/%{name}-%{version}.tar.bz2
 # Source0-md5:	f9950a4d61fe6261e3211d317eab0e03
 Source1:	%{name}.script
 Source2:	%{name}-bootanim.script
