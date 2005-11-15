@@ -24,7 +24,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 When you have a kernel with bootsplash capability you can use the
-bootsplash and control it's behaviour with this set of userspace
+bootsplash and control its behaviour with this set of userspace
 utilities.
 
 %description -l pl
