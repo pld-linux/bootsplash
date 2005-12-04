@@ -61,7 +61,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc {Documentation,Utilities}/README.*
 %attr(755,root,root) %{_bindir}/*
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/bootsplash
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/bootsplash
 %attr(754,root,root) /etc/rc.d/init.d/bootsplash
 %{_datadir}/%{name}
 %dir /etc/bootsplash
