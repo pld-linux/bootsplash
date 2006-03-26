@@ -5,16 +5,17 @@
 Summary:	Bootsplash - graphical boot process for Linux
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
-Version:	3.1
+Version:	3.2
 Release:	1
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://www.bootsplash.de/files/splashutils/%{name}-%{version}.tar.bz2
-# Source0-md5:	f9950a4d61fe6261e3211d317eab0e03
+# Source0-md5:	b74c104372fd182d0442b3ed63210e29
 Source1:	%{name}.script
 Source2:	%{name}-bootanim.script
 Source3:	%{name}.sysconfig
 Source4:	%{name}.init
+Patch0:		%{name}-3.2_makefile_libmng.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
@@ -34,6 +35,7 @@ narzêdzi przestrzeni u¿ytkownika.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} -C Utilities \
