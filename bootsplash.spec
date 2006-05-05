@@ -3,6 +3,7 @@
 # - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
 #
 Summary:	Bootsplash - graphical boot process for Linux
+Summary(de):	Bootsplash - graphischer System Start
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.2
@@ -28,6 +29,10 @@ When you have a kernel with bootsplash capability you can use the
 bootsplash and control its behaviour with this set of userspace
 utilities.
 
+%description -l de
+Wenn du einen Kernel mit der bootsplash Option hast, kannst du diese
+mit diesen Programmen steuern.
+
 %description -l pl
 Maj±c j±dro z opcj± bootsplash mo¿na uzyskaæ graficzny ekran podczas
 startu systemu i sterowaæ jego zachowaniem przy u¿yciu tego zbioru
@@ -45,7 +50,7 @@ narzêdzi przestrzeni u¿ytkownika.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},/etc/{bootsplash/themes,rc.d/init.d,sysconfig}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},%{_sysconfdir}/{bootsplash/themes,rc.d/init.d,sysconfig}}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
 install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/bootanim
@@ -66,5 +71,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/bootsplash
 %attr(754,root,root) /etc/rc.d/init.d/bootsplash
 %{_datadir}/%{name}
-%dir /etc/bootsplash
-%dir /etc/bootsplash/themes
+%dir %{_sysconfdir}/bootsplash
+%dir %{_sysconfdir}/bootsplash/themes
