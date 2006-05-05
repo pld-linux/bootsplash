@@ -1,0 +1,61 @@
+#!/bin/sh
+#
+# bootsplash	bootsplashed console
+#
+# chkconfig:	345 99 99
+#
+# description:	Activate bootsplashed consoles
+#
+# $Id$
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Set defaults
+RES=`fbresolution`
+
+# Get service config - may override defaults
+[ -f /etc/sysconfig/bootsplash ] && . /etc/sysconfig/bootsplash
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/bootsplash ]; then
+		
+		for console in $BOOT_SPLASH_CONSOLES; do
+		    msg_starting "bootsplash terminal $console"	
+		    daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
+		done
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/bootsplash
+	else
+		msg_already_running bootsplash
+	fi
+	;;
+  stop)
+	if [ -f /var/lock/subsys/bootsplash ]; then
+		# Stop daemons.
+		msg_stopping bootsplash
+		#killproc bootsplash
+		rm -f /var/lock/subsys/bootsplash
+	else
+		msg_not_running bootsplash
+	fi
+	;;
+  restart)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  *)
+	# show "Usage: %s {start|stop|restart}"
+	msg_usage "$0 {start|stop|restart}"
+	exit 3
+esac
+
+exit $RETVAL
+
+# This must be last line !
+# vi:syntax=sh:tw=78:ts=8:sw=4
