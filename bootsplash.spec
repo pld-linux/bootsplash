@@ -50,7 +50,8 @@ narzêdzi przestrzeni u¿ytkownika.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},%{_sysconfdir}/{bootsplash/themes,rc.d/init.d,sysconfig}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},%{_sysconfdir}/bootsplash/themes} \
+	 $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
 install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/bootanim
