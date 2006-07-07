@@ -21,21 +21,12 @@ RES=`fbresolution`
 # See how we were called.
 case "$1" in
   start|restart|reload|force-reload)
-	# Check if the service is already running?
-	if [ ! -f /var/lock/subsys/bootsplash ]; then
-		
-		for console in $BOOT_SPLASH_CONSOLES; do
-		    msg_starting "bootsplash terminal $console"	
-		    daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
-		done
-		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/bootsplash
-	else
-		msg_already_running bootsplash
-	fi
+	for console in $BOOT_SPLASH_CONSOLES; do
+	    msg_starting "bootsplash terminal $console"	
+	    daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
+	done
 	;;
   stop)
-	rm -f /var/lock/subsys/bootsplash
 	;;
   *)
 	# show "Usage: %s {start|stop|restart}"
