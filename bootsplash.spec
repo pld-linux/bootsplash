@@ -3,30 +3,36 @@
 # - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
 #
 Summary:	Bootsplash - graphical boot process for Linux
+Summary(de):	Bootsplash - graphischer System Start
 Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
-Version:	3.1
+Version:	3.2
 Release:	1
-Epoch:		0
 License:	GPL v2
 Group:		Applications/System
-Source0:	ftp://ftp.suse.com/pub/people/stepan/%{name}/rpm-sources/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	f9950a4d61fe6261e3211d317eab0e03
+Source0:	http://www.bootsplash.de/files/splashutils/%{name}-%{version}.tar.bz2
+# Source0-md5:	b74c104372fd182d0442b3ed63210e29
 Source1:	%{name}.script
 Source2:	%{name}-bootanim.script
 Source3:	%{name}.sysconfig
 Source4:	%{name}.init
+Patch0:		%{name}-3.2_makefile_libmng.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_bindir	/bin
 
 %description
 When you have a kernel with bootsplash capability you can use the
-bootsplash and control it's behaviour with this set of userspace
+bootsplash and control its behaviour with this set of userspace
 utilities.
+
+%description -l de
+Wenn du einen Kernel mit der bootsplash Option hast, kannst du diese
+mit diesen Programmen steuern.
 
 %description -l pl
 Maj±c j±dro z opcj± bootsplash mo¿na uzyskaæ graficzny ekran podczas
@@ -35,6 +41,7 @@ narzêdzi przestrzeni u¿ytkownika.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} -C Utilities \
@@ -44,7 +51,8 @@ narzêdzi przestrzeni u¿ytkownika.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},/etc/{bootsplash/themes,rc.d/init.d,sysconfig}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_datadir}/%{name},%{_sysconfdir}/bootsplash/themes} \
+	 $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_bindir}/splash
 install %{SOURCE2} $RPM_BUILD_ROOT%{_bindir}/bootanim
@@ -58,12 +66,21 @@ install Utilities/*.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+/sbin/chkconfig --add bootsplash
+
+%preun
+if [ "$1" = "0" ]; then
+	%service bootsplash stop
+	/sbin/chkconfig --del bootsplash
+fi
+
 %files
 %defattr(644,root,root,755)
 %doc {Documentation,Utilities}/README.*
 %attr(755,root,root) %{_bindir}/*
-%attr(640,root,root) %config(noreplace) %verify(not md5 size mtime) /etc/sysconfig/bootsplash
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/bootsplash
 %attr(754,root,root) /etc/rc.d/init.d/bootsplash
 %{_datadir}/%{name}
-%dir /etc/bootsplash
-%dir /etc/bootsplash/themes
+%dir %{_sysconfdir}/bootsplash
+%dir %{_sysconfdir}/bootsplash/themes
