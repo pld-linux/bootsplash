@@ -20,7 +20,7 @@ RES=`fbresolution`
 
 # See how we were called.
 case "$1" in
-  start)
+  start|restart|reload|force-reload)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/bootsplash ]; then
 		
@@ -35,23 +35,11 @@ case "$1" in
 	fi
 	;;
   stop)
-	if [ -f /var/lock/subsys/bootsplash ]; then
-		# Stop daemons.
-		msg_stopping bootsplash
-		#killproc bootsplash
-		rm -f /var/lock/subsys/bootsplash
-	else
-		msg_not_running bootsplash
-	fi
-	;;
-  restart)
-	$0 stop
-	$0 start
-	exit $?
+	rm -f /var/lock/subsys/bootsplash
 	;;
   *)
 	# show "Usage: %s {start|stop|restart}"
-	msg_usage "$0 {start|stop|restart}"
+	msg_usage "$0 {start|stop|restart|reload|force-reload}"
 	exit 3
 esac
 
