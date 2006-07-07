@@ -20,6 +20,7 @@ Patch0:		%{name}-3.2_makefile_libmng.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_bindir	/bin
@@ -64,6 +65,15 @@ install Utilities/*.ttf $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+/sbin/chkconfig --add bootsplash
+
+%preun
+if [ "$1" = "0" ]; then
+	%service bootsplash stop
+	/sbin/chkconfig --del bootsplash
+fi
 
 %files
 %defattr(644,root,root,755)
