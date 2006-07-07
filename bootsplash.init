@@ -27,6 +27,7 @@ case "$1" in
 	done
 	;;
   stop)
+  	exit 0
 	;;
   *)
 	# show "Usage: %s {start|stop|restart}"
