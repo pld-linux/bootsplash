@@ -1,4 +1,3 @@
-#
 # TODO:
 # - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
 #
@@ -20,6 +19,7 @@ Patch0:		%{name}-3.2_makefile_libmng.patch
 URL:		http://www.bootsplash.org/
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
