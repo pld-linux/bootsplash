@@ -21,10 +21,12 @@ RES=`fbresolution`
 # See how we were called.
 case "$1" in
   start|restart|reload|force-reload)
-	for console in $BOOT_SPLASH_CONSOLES; do
-	    msg_starting "bootsplash terminal $console"	
-	    daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
-	done
+	if is_yes "$BOOT_SPLASH"; then
+	    for console in $BOOT_SPLASH_CONSOLES; do
+		msg_starting "bootsplash terminal $console"	
+		daemon /bin/splash.bin -s -u $console -n "/etc/bootsplash/themes/$THEME/config/bootsplash-$RES.cfg"
+	    done
+	fi
 	;;
   stop)
   	exit 0
