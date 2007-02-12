@@ -2,8 +2,8 @@
 # - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
 #
 Summary:	Bootsplash - graphical boot process for Linux
-Summary(de):	Bootsplash - graphischer System Start
-Summary(pl):	Bootsplash - graficzny proces startu systemu dla Linuksa
+Summary(de.UTF-8):   Bootsplash - graphischer System Start
+Summary(pl.UTF-8):   Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.2
 Release:	2
@@ -30,14 +30,14 @@ When you have a kernel with bootsplash capability you can use the
 bootsplash and control its behaviour with this set of userspace
 utilities.
 
-%description -l de
+%description -l de.UTF-8
 Wenn du einen Kernel mit der bootsplash Option hast, kannst du diese
 mit diesen Programmen steuern.
 
-%description -l pl
-Maj±c j±dro z opcj± bootsplash mo¿na uzyskaæ graficzny ekran podczas
-startu systemu i sterowaæ jego zachowaniem przy u¿yciu tego zbioru
-narzêdzi przestrzeni u¿ytkownika.
+%description -l pl.UTF-8
+MajÄ…c jÄ…dro z opcjÄ… bootsplash moÅ¼na uzyskaÄ‡ graficzny ekran podczas
+startu systemu i sterowaÄ‡ jego zachowaniem przy uÅ¼yciu tego zbioru
+narzÄ™dzi przestrzeni uÅ¼ytkownika.
 
 %prep
 %setup -q
