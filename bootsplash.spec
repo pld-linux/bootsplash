@@ -2,8 +2,8 @@
 # - place somewhere info that distkernel support only 16bit splashes (thnx Tomasz Grobelny)
 #
 Summary:	Bootsplash - graphical boot process for Linux
-Summary(de.UTF-8):   Bootsplash - graphischer System Start
-Summary(pl.UTF-8):   Bootsplash - graficzny proces startu systemu dla Linuksa
+Summary(de.UTF-8):	Bootsplash - graphischer System Start
+Summary(pl.UTF-8):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.2
 Release:	2
