@@ -21,6 +21,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libmng-devel
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
+Suggests:	bootsplash-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_bindir	/bin
