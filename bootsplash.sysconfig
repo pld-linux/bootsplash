@@ -19,7 +19,7 @@ BOOT_SPLASH_CONSOLES=
 
 # bootsplash theme... You have to have installed one
 #THEME=darkblue
-THEME=pldblackbyshad
+THEME=blackbyshad
 
 # Text to show when booting...
 #BOOT_TXT="Booting the system... press F2 for verbose mode"
