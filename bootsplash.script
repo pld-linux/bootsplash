@@ -32,7 +32,7 @@
 #
 # See http://www.bootsplash.org/ for more information.
 #
-# Modified for PLD (arekm@pld-linux.org)
+# Modified for PLD Linux (arekm@pld-linux.org)
 
 [ -f /etc/sysconfig/bootsplash ] && . /etc/sysconfig/bootsplash
 
