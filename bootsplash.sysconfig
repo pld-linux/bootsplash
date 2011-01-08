@@ -1,7 +1,6 @@
 # $Id$
 
-# REMEMBER: changing BOOT_SPLASH, BOOT_SPLASH_RESOLUTIONS, THEME should be
-#           followed by geninitrd
+# REMEMBER: after changing BOOT_SPLASH, BOOT_SPLASH_RESOLUTIONS, THEME you should regenerate initrd
 
 # boot splash enabled?
 #BOOT_SPLASH=yes
@@ -28,4 +27,3 @@ BOOT_TXT="Booting the system... press F2 for verbose mode"
 # Text to show when shutting down...
 #SHUTDOWN_TXT="Shutting down the system... press F2 for verbose mode"
 SHUTDOWN_TXT="Shutting down the system... press F2 for verbose mode"
-
