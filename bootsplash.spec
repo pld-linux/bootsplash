@@ -6,7 +6,7 @@ Summary(de.UTF-8):	Bootsplash - graphischer System Start
 Summary(pl.UTF-8):	Bootsplash - graficzny proces startu systemu dla Linuksa
 Name:		bootsplash
 Version:	3.2
-Release:	5
+Release:	6
 License:	GPL v2
 Group:		Applications/System
 Source0:	http://www.bootsplash.de/files/splashutils/%{name}-%{version}.tar.bz2
